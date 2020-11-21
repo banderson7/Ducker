@@ -1,4 +1,4 @@
-﻿using System;
+﻿using DefaultNamespace;
 using UnityEngine;
 
 public class Duck : MonoBehaviour
@@ -16,6 +16,12 @@ public class Duck : MonoBehaviour
         {
             Die();
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        var follower = other.GetComponent<IFollower>();
+        follower?.StartFollowing(transform);
     }
 
     private void Die()

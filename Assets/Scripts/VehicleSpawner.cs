@@ -6,7 +6,8 @@ public class VehicleSpawner : MonoBehaviour
 {
     public GameObject car;
     public Transform spawnPoint;
-    public float spawnTimer;
+    public float spawnTimerMin;
+    public float spawnTimerMax;
     public bool rightToLeft;
 
     private void Start()
@@ -16,11 +17,12 @@ public class VehicleSpawner : MonoBehaviour
 
     private IEnumerator Spawn()
     {
+        var spawnTimer = Random.Range(spawnTimerMin, spawnTimerMax);
+        yield return new WaitForSeconds(spawnTimer);
         Quaternion rotation = Quaternion.identity;
         if (rightToLeft)
             rotation = spawnPoint.rotation * Quaternion.Euler(0f, 180f, 0f);
         Instantiate(car, spawnPoint.position, rotation);
-        yield return new WaitForSeconds(spawnTimer);
         StartCoroutine(Spawn());
     }
 }

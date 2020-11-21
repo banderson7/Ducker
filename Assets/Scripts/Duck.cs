@@ -4,14 +4,10 @@ using UnityEngine;
 public class Duck : MonoBehaviour
 {
     private Input _input;
-    private Renderer _renderer;
-    private Collider _collider;
 
     private void Awake()
     {
         _input = GetComponent<Input>();
-        _renderer = GetComponent<MeshRenderer>();
-        _collider = GetComponent<Collider>();
     }
 
     private void OnCollisionEnter(Collision other)

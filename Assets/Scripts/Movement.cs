@@ -8,11 +8,11 @@ public class Movement : MonoBehaviour
     private float _forwardInput;
     private float _turnInput;
     private Transform _myTransform;
-    private Rigidbody _rb;
+    private Animator _animator;
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
+        _animator = GetComponentInChildren<Animator>();
         _myTransform = transform;
     }
     public void MoveInput(Vector2 input)
@@ -24,18 +24,23 @@ public class Movement : MonoBehaviour
     private void ForwardMovement()
     {
         _myTransform.position += _myTransform.forward * (_forwardInput * speed * Time.deltaTime);
+        _animator.SetBool("Walking", true);
     }
 
     private void Turn()
     {
         _myTransform.Rotate(_myTransform.up * (_turnInput * turnSpeed * Time.deltaTime));
+        _animator.SetBool("Walking", true);
     }
 
     private void Update()
     {
         if (_forwardInput > 0)
             ForwardMovement();
-
+        
         Turn();
+        
+        if (_forwardInput <= 0 && _turnInput == 0)
+            _animator.SetBool("Walking", false);
     }
 }

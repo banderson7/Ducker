@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Input : MonoBehaviour
 {
@@ -18,5 +16,10 @@ public class Input : MonoBehaviour
         _controls.Duck.Move.canceled += ctx => _movement.MoveInput(ctx.ReadValue<Vector2>());
         
         _controls.Duck.Enable();
+    }
+
+    public void StopDuck()
+    {
+        _controls.Duck.Disable();
     }
 }
